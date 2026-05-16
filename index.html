@@ -495,17 +495,54 @@
 
   <section id="simulation">
     <div class="section-title">
-      <h2>Live Stopwatch Demo</h2>
-      <p>Interactive stopwatch for the GitHub webpage</p>
+      <h2>Project Gallery</h2>
+      <p>Components and simulation snapshots used in the project</p>
     </div>
 
-    <div class="stopwatch-demo">
-      <div class="display" id="display">00:00</div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>7490N IC</h3>
+        <img src="images/7490n-ic.jpg" alt="7490N IC" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
 
-      <div class="controls">
-        <button class="start" onclick="startStopwatch()">Start</button>
-        <button class="pause" onclick="pauseStopwatch()">Pause</button>
-        <button class="reset" onclick="resetStopwatch()">Reset</button>
+      <div class="card">
+        <h3>7447N IC</h3>
+        <img src="images/7447n-ic.jpg" alt="7447N IC" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>7-Segment Display</h3>
+        <img src="images/7segment-display.jpg" alt="7 Segment Display" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>Signal Generator</h3>
+        <img src="images/signal-generator.jpg" alt="Signal Generator" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>Power Supply</h3>
+        <img src="images/power-supply.jpg" alt="Power Supply" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>7408N AND Gate</h3>
+        <img src="images/7408n-and-gate.jpg" alt="7408N AND Gate" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>Initial State of Digital Stopwatch</h3>
+        <img src="images/initial-state.jpg" alt="Initial State" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>Intermediate State of Digital Stopwatch</h3>
+        <img src="images/intermediate-state.jpg" alt="Intermediate State" style="width:100%; border-radius:12px; margin-top:15px;">
+      </div>
+
+      <div class="card">
+        <h3>Final State Before Reset</h3>
+        <img src="images/final-state.jpg" alt="Final State" style="width:100%; border-radius:12px; margin-top:15px;">
       </div>
     </div>
   </section>
@@ -556,85 +593,13 @@
     </div>
   </section>
 
-  <section id="team">
-    <div class="section-title">
-      <h2>Project Team</h2>
-      <p>Department of Software Engineering | Wah Engineering College</p>
-    </div>
-
-    <div class="team">
-      <div class="team-member">
-        <h3>M Uzair Ejaz</h3>
-        <p>UW-24-SW-BS-055</p>
-      </div>
-
-      <div class="team-member">
-        <h3>CH M Aaman</h3>
-        <p>UW-24-SW-BS-052</p>
-      </div>
-
-      <div class="team-member">
-        <h3>Asad Mehmood</h3>
-        <p>UW-24-SW-BS-005</p>
-      </div>
-
-      <div class="team-member">
-        <h3>Adeeb Saghir</h3>
-        <p>UW-24-SW-BS-002</p>
-      </div>
-
-      <div class="team-member">
-        <h3>Huzaifa Abid</h3>
-        <p>UW-24-SW-BS-032</p>
-      </div>
-    </div>
-  </section>
+  
 
   <footer>
     <p>© 2026 Digital Stopwatch Project | Developed for DLD Course</p>
   </footer>
 
-  <script>
-    let seconds = 0;
-    let minutes = 0;
-    let timer = null;
-
-    function updateDisplay() {
-      const min = String(minutes).padStart(2, '0');
-      const sec = String(seconds).padStart(2, '0');
-      document.getElementById('display').innerText = `${min}:${sec}`;
-    }
-
-    function startStopwatch() {
-      if (timer !== null) return;
-
-      timer = setInterval(() => {
-        seconds++;
-
-        if (seconds === 60) {
-          minutes++;
-          seconds = 0;
-        }
-
-        updateDisplay();
-      }, 1000);
-    }
-
-    function pauseStopwatch() {
-      clearInterval(timer);
-      timer = null;
-    }
-
-    function resetStopwatch() {
-      clearInterval(timer);
-      timer = null;
-      seconds = 0;
-      minutes = 0;
-      updateDisplay();
-    }
-
-    updateDisplay();
-  </script>
+  
 
 </body>
 </html>
