@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Stopwatch | DLD Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.7;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: rgba(59,130,246,0.15);
+      border-radius: 50%;
+      top: -250px;
+      right: -150px;
+      filter: blur(40px);
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(14,165,233,0.12);
+      border-radius: 50%;
+      bottom: -220px;
+      left: -150px;
+      filter: blur(50px);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #38bdf8;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 40px;
+      background: #38bdf8;
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: #7dd3fc;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      flex-wrap: wrap;
+      padding: 16px;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f8fafc;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #94a3b8;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #38bdf8;
+    }
+
+    .card h3 {
+      color: #7dd3fc;
+      margin-bottom: 15px;
+    }
+
+    .card ul {
+      padding-left: 20px;
+      color: #cbd5e1;
+    }
+
+    .timeline {
+      border-left: 3px solid #38bdf8;
+      padding-left: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .timeline-item {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #38bdf8;
+      position: absolute;
+      left: -40px;
+      top: 25px;
+    }
+
+    .highlight {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .team-member {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 18px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .team-member:hover {
+      transform: scale(1.04);
+    }
+
+    .team-member h3 {
+      margin-top: 10px;
+      color: #7dd3fc;
+    }
+
+    .stopwatch-demo {
+      background: #020617;
+      border-radius: 25px;
+      padding: 50px 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .display {
+      font-size: 5rem;
+      font-weight: bold;
+      color: #38bdf8;
+      margin-bottom: 30px;
+      letter-spacing: 8px;
+    }
+
+    .controls button {
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .start {
+      background: #22c55e;
+      color: white;
+    }
+
+    .pause {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .reset {
+      background: #ef4444;
+      color: white;
+    }
+
+    .controls button:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #020617;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media(max-width: 768px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .display {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="hero">
+      <h1>Digital Stopwatch</h1>
+      <p>
+        A Digital Logic Design project developed using counters, decoders,
+        AND gates, and 7-segment displays in NI Multisim.
+      </p>
+      <a href="#about" class="btn">Explore Project</a>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#objectives">Objectives</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#working">Working</a></li>
+      <li><a href="#procedure">Procedure</a></li>
+      <li><a href="#simulation">Simulation</a></li>
+      <li><a href="#future">Future</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <div class="section-title">
+      <h2>Introduction</h2>
+      <p>Overview of the Digital Stopwatch Project</p>
+    </div>
+
+    <div class="card">
+      <p>
+        A <span class="highlight">Digital Stopwatch</span> is a precise timing device used to measure elapsed time in seconds.
+        This project was designed using Digital Logic Design principles without any microcontroller or programming.
+        The stopwatch uses <span class="highlight">7490 counters</span>, <span class="highlight">7447 decoders</span>,
+        <span class="highlight">7408 AND gates</span>, and <span class="highlight">7-segment displays</span>.
+      </p>
+      <br>
+      <p>
+        The entire circuit was simulated using NI Multisim and displays time from 00 to 59 seconds in real-time.
+        The project helps students understand BCD counting, decoding, sequential logic circuits, and digital display systems.
+      </p>
+    </div>
+  </section>
+
+  <section id="objectives">
+    <div class="section-title">
+      <h2>Project Objectives</h2>
+      <p>Main goals of the stopwatch system</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Design Stopwatch</h3>
+        <p>Create a 2-digit digital stopwatch using Digital Logic Design concepts.</p>
+      </div>
+
+      <div class="card">
+        <h3>Use Counters</h3>
+        <p>Implement modulo-10 and modulo-6 counting using 7490N ICs.</p>
+      </div>
+
+      <div class="card">
+        <h3>Display Timing</h3>
+        <p>Connect decoders with 7-segment displays to show real-time counting.</p>
+      </div>
+
+      <div class="card">
+        <h3>Simulation</h3>
+        <p>Test and observe the stopwatch functionality using NI Multisim.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="components">
+    <div class="section-title">
+      <h2>Components Used</h2>
+      <p>Hardware and digital logic components</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>7490N IC</h3>
+        <ul>
+          <li>BCD decade counter</li>
+          <li>Counts from 0 to 9</li>
+          <li>Provides binary outputs</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>7447N IC</h3>
+        <ul>
+          <li>BCD to 7-segment decoder</li>
+          <li>Controls display segments</li>
+          <li>Supports common anode displays</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>7408N AND Gate</h3>
+        <ul>
+          <li>Contains four AND gates</li>
+          <li>Used for control and reset logic</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>7-Segment Display</h3>
+        <ul>
+          <li>Displays numeric digits</li>
+          <li>Used for real-time stopwatch output</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Signal Generator</h3>
+        <ul>
+          <li>Produces 1Hz clock pulse</li>
+          <li>Acts as stopwatch ticking signal</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Power Supply</h3>
+        <ul>
+          <li>Provides +5V DC</li>
+          <li>Powers all digital ICs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="working">
+    <div class="section-title">
+      <h2>Working Principle</h2>
+      <p>How the digital stopwatch functions</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Clock Pulse Generation</h3>
+        <p>The signal generator creates 1 pulse per second which acts as the timing signal.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Counting Process</h3>
+        <p>The first 7490 counter counts from 0–9 while the second counts from 0–5.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>BCD Conversion</h3>
+        <p>The counter outputs are sent to 7447 decoders which convert BCD into display signals.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Display Output</h3>
+        <p>The 7-segment displays show the elapsed time from 00 to 59 seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="procedure">
+    <div class="section-title">
+      <h2>Procedure</h2>
+      <p>Steps performed in NI Multisim</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Step 1</h3>
+        <p>Create the complete stopwatch circuit in NI Multisim.</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 2</h3>
+        <p>Connect the XFG2 signal generator to the 7490 counters.</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 3</h3>
+        <p>Configure counters for units and tens counting.</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 4</h3>
+        <p>Connect BCD outputs to 7447 decoder ICs.</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 5</h3>
+        <p>Attach common anode 7-segment displays.</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 6</h3>
+        <p>Run simulation and observe counting from 00 to 59.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulation">
+    <div class="section-title">
+      <h2>Live Stopwatch Demo</h2>
+      <p>Interactive stopwatch for the GitHub webpage</p>
+    </div>
+
+    <div class="stopwatch-demo">
+      <div class="display" id="display">00:00</div>
+
+      <div class="controls">
+        <button class="start" onclick="startStopwatch()">Start</button>
+        <button class="pause" onclick="pauseStopwatch()">Pause</button>
+        <button class="reset" onclick="resetStopwatch()">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>Conclusion</h2>
+      <p>Project Summary</p>
+    </div>
+
+    <div class="card">
+      <p>
+        The Digital Stopwatch project was successfully implemented using digital logic components.
+        The system accurately counted time from 00 to 59 seconds using 7490 counters and displayed
+        the results through 7-segment displays controlled by 7447 decoders.
+        This project enhanced understanding of sequential circuits, BCD conversion,
+        digital counters, and real-time display systems.
+      </p>
+    </div>
+  </section>
+
+  <section id="future">
+    <div class="section-title">
+      <h2>Future Enhancements</h2>
+      <p>Possible improvements for the project</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Pause & Resume</h3>
+        <p>Add pause and resume controls using extra logic gates.</p>
+      </div>
+
+      <div class="card">
+        <h3>Minute Display</h3>
+        <p>Expand the stopwatch to display minutes and seconds.</p>
+      </div>
+
+      <div class="card">
+        <h3>Microcontroller Upgrade</h3>
+        <p>Implement the stopwatch using Arduino or other microcontrollers.</p>
+      </div>
+
+      <div class="card">
+        <h3>Physical PCB</h3>
+        <p>Develop a real hardware prototype using PCB technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="section-title">
+      <h2>Project Team</h2>
+      <p>Department of Software Engineering | Wah Engineering College</p>
+    </div>
+
+    <div class="team">
+      <div class="team-member">
+        <h3>M Uzair Ejaz</h3>
+        <p>UW-24-SW-BS-055</p>
+      </div>
+
+      <div class="team-member">
+        <h3>CH M Aaman</h3>
+        <p>UW-24-SW-BS-052</p>
+      </div>
+
+      <div class="team-member">
+        <h3>Asad Mehmood</h3>
+        <p>UW-24-SW-BS-005</p>
+      </div>
+
+      <div class="team-member">
+        <h3>Adeeb Saghir</h3>
+        <p>UW-24-SW-BS-002</p>
+      </div>
+
+      <div class="team-member">
+        <h3>Huzaifa Abid</h3>
+        <p>UW-24-SW-BS-032</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Digital Stopwatch Project | Developed for DLD Course</p>
+  </footer>
+
+  <script>
+    let seconds = 0;
+    let minutes = 0;
+    let timer = null;
+
+    function updateDisplay() {
+      const min = String(minutes).padStart(2, '0');
+      const sec = String(seconds).padStart(2, '0');
+      document.getElementById('display').innerText = `${min}:${sec}`;
+    }
+
+    function startStopwatch() {
+      if (timer !== null) return;
+
+      timer = setInterval(() => {
+        seconds++;
+
+        if (seconds === 60) {
+          minutes++;
+          seconds = 0;
+        }
+
+        updateDisplay();
+      }, 1000);
+    }
+
+    function pauseStopwatch() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function resetStopwatch() {
+      clearInterval(timer);
+      timer = null;
+      seconds = 0;
+      minutes = 0;
+      updateDisplay();
+    }
+
+    updateDisplay();
+  </script>
+
+</body>
+</html>
