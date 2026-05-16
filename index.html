@@ -4,349 +4,319 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Stopwatch | DLD Project</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-      line-height: 1.7;
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#0f172a;
+      color:#f8fafc;
+      line-height:1.7;
     }
 
-    header {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
-      position: relative;
-      overflow: hidden;
+    header{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px 20px;
+      background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+      position:relative;
+      overflow:hidden;
     }
 
-    header::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: rgba(59,130,246,0.15);
-      border-radius: 50%;
-      top: -250px;
-      right: -150px;
-      filter: blur(40px);
+    header::before{
+      content:"";
+      position:absolute;
+      width:600px;
+      height:600px;
+      background:rgba(59,130,246,0.15);
+      border-radius:50%;
+      top:-250px;
+      right:-150px;
+      filter:blur(40px);
     }
 
-    header::after {
-      content: "";
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: rgba(14,165,233,0.12);
-      border-radius: 50%;
-      bottom: -220px;
-      left: -150px;
-      filter: blur(50px);
+    header::after{
+      content:"";
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:rgba(14,165,233,0.12);
+      border-radius:50%;
+      bottom:-220px;
+      left:-150px;
+      filter:blur(50px);
     }
 
-    .hero {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
+    .hero{
+      position:relative;
+      z-index:1;
+      max-width:900px;
     }
 
-    .hero h1 {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      color: #38bdf8;
+    .hero h1{
+      font-size:4rem;
+      color:#38bdf8;
+      margin-bottom:20px;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: #cbd5e1;
-      margin-bottom: 30px;
+    .hero p{
+      font-size:1.2rem;
+      color:#cbd5e1;
+      margin-bottom:30px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 14px 32px;
-      border-radius: 40px;
-      background: #38bdf8;
-      color: #0f172a;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
+    .btn{
+      display:inline-block;
+      padding:14px 32px;
+      border-radius:40px;
+      background:#38bdf8;
+      color:#0f172a;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.3s;
     }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      background: #7dd3fc;
+    .btn:hover{
+      transform:translateY(-3px);
+      background:#7dd3fc;
     }
 
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(15,23,42,0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(15,23,42,0.9);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
     }
 
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      flex-wrap: wrap;
-      padding: 16px;
-      gap: 25px;
+    nav ul{
+      display:flex;
+      justify-content:center;
+      list-style:none;
+      flex-wrap:wrap;
+      padding:16px;
+      gap:25px;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #f8fafc;
-      font-weight: 500;
-      transition: 0.3s;
+    nav a{
+      text-decoration:none;
+      color:#f8fafc;
+      font-weight:500;
+      transition:0.3s;
     }
 
-    nav a:hover {
-      color: #38bdf8;
+    nav a:hover{
+      color:#38bdf8;
     }
 
-    section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 90px 20px;
+    section{
+      max-width:1200px;
+      margin:auto;
+      padding:90px 20px;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
     }
 
-    .section-title h2 {
-      font-size: 2.5rem;
-      color: #38bdf8;
-      margin-bottom: 10px;
+    .section-title h2{
+      font-size:2.5rem;
+      color:#38bdf8;
+      margin-bottom:10px;
     }
 
-    .section-title p {
-      color: #94a3b8;
+    .section-title p{
+      color:#94a3b8;
     }
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:25px;
     }
 
-    .card {
-      background: #1e293b;
-      padding: 25px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: 0.3s;
+    .card{
+      background:#1e293b;
+      padding:25px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      transition:0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: #38bdf8;
+    .card:hover{
+      transform:translateY(-8px);
+      border-color:#38bdf8;
     }
 
-    .card h3 {
-      color: #7dd3fc;
-      margin-bottom: 15px;
+    .card h3{
+      color:#7dd3fc;
+      margin-bottom:15px;
     }
 
-    .card ul {
-      padding-left: 20px;
-      color: #cbd5e1;
+    .card ul{
+      padding-left:20px;
+      color:#cbd5e1;
     }
 
-    .timeline {
-      border-left: 3px solid #38bdf8;
-      padding-left: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+    .timeline{
+      border-left:3px solid #38bdf8;
+      padding-left:30px;
+      display:flex;
+      flex-direction:column;
+      gap:30px;
     }
 
-    .timeline-item {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 15px;
-      position: relative;
+    .timeline-item{
+      background:#1e293b;
+      padding:20px;
+      border-radius:15px;
+      position:relative;
     }
 
-    .timeline-item::before {
-      content: "";
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #38bdf8;
-      position: absolute;
-      left: -40px;
-      top: 25px;
+    .timeline-item::before{
+      content:"";
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:#38bdf8;
+      position:absolute;
+      left:-40px;
+      top:25px;
     }
 
-    .highlight {
-      color: #38bdf8;
-      font-weight: 600;
+    .highlight{
+      color:#38bdf8;
+      font-weight:600;
     }
 
-    .team {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+    .gallery-img{
+      width:100%;
+      border-radius:15px;
+      margin-top:15px;
+      transition:0.3s;
     }
 
-    .team-member {
-      background: #1e293b;
-      padding: 25px;
-      border-radius: 18px;
-      text-align: center;
-      transition: 0.3s;
+    .gallery-img:hover{
+      transform:scale(1.03);
     }
 
-    .team-member:hover {
-      transform: scale(1.04);
+    footer{
+      text-align:center;
+      padding:30px 20px;
+      background:#020617;
+      color:#94a3b8;
+      border-top:1px solid rgba(255,255,255,0.08);
     }
 
-    .team-member h3 {
-      margin-top: 10px;
-      color: #7dd3fc;
-    }
+    @media(max-width:768px){
 
-    .stopwatch-demo {
-      background: #020617;
-      border-radius: 25px;
-      padding: 50px 20px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .display {
-      font-size: 5rem;
-      font-weight: bold;
-      color: #38bdf8;
-      margin-bottom: 30px;
-      letter-spacing: 8px;
-    }
-
-    .controls button {
-      padding: 12px 24px;
-      margin: 10px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .start {
-      background: #22c55e;
-      color: white;
-    }
-
-    .pause {
-      background: #f59e0b;
-      color: white;
-    }
-
-    .reset {
-      background: #ef4444;
-      color: white;
-    }
-
-    .controls button:hover {
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: #020617;
-      color: #94a3b8;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    @media(max-width: 768px) {
-      .hero h1 {
-        font-size: 2.8rem;
+      .hero h1{
+        font-size:2.8rem;
       }
 
-      .display {
-        font-size: 3rem;
-      }
     }
+
   </style>
 </head>
+
 <body>
 
   <header>
+
     <div class="hero">
+
       <h1>Digital Stopwatch</h1>
+
       <p>
-        A Digital Logic Design project developed using counters, decoders,
-        AND gates, and 7-segment displays in NI Multisim.
+        A Digital Logic Design project developed using counters,
+        decoders, AND gates, and 7-segment displays in NI Multisim.
       </p>
+
       <a href="#about" class="btn">Explore Project</a>
+
     </div>
+
   </header>
 
   <nav>
+
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#objectives">Objectives</a></li>
       <li><a href="#components">Components</a></li>
       <li><a href="#working">Working</a></li>
       <li><a href="#procedure">Procedure</a></li>
-      <li><a href="#simulation">Simulation</a></li>
+      <li><a href="#gallery">Project Gallery</a></li>
       <li><a href="#future">Future</a></li>
-      <li><a href="#team">Team</a></li>
     </ul>
+
   </nav>
 
   <section id="about">
+
     <div class="section-title">
       <h2>Introduction</h2>
       <p>Overview of the Digital Stopwatch Project</p>
     </div>
 
     <div class="card">
+
       <p>
-        A <span class="highlight">Digital Stopwatch</span> is a precise timing device used to measure elapsed time in seconds.
-        This project was designed using Digital Logic Design principles without any microcontroller or programming.
-        The stopwatch uses <span class="highlight">7490 counters</span>, <span class="highlight">7447 decoders</span>,
-        <span class="highlight">7408 AND gates</span>, and <span class="highlight">7-segment displays</span>.
+        A <span class="highlight">Digital Stopwatch</span> is a precise timing device
+        used to measure elapsed time in seconds.
+        This project was designed using Digital Logic Design principles
+        without any microcontroller or programming.
       </p>
+
       <br>
+
       <p>
-        The entire circuit was simulated using NI Multisim and displays time from 00 to 59 seconds in real-time.
-        The project helps students understand BCD counting, decoding, sequential logic circuits, and digital display systems.
+        The stopwatch uses <span class="highlight">7490 counters</span>,
+        <span class="highlight">7447 decoders</span>,
+        <span class="highlight">7408 AND gates</span>,
+        and <span class="highlight">7-segment displays</span>.
       </p>
+
+      <br>
+
+      <p>
+        The entire circuit was simulated using NI Multisim and displays time
+        from 00 to 59 seconds in real-time.
+      </p>
+
     </div>
+
   </section>
 
   <section id="objectives">
+
     <div class="section-title">
       <h2>Project Objectives</h2>
       <p>Main goals of the stopwatch system</p>
     </div>
 
     <div class="card-grid">
+
       <div class="card">
         <h3>Design Stopwatch</h3>
-        <p>Create a 2-digit digital stopwatch using Digital Logic Design concepts.</p>
+        <p>Create a 2-digit digital stopwatch using DLD concepts.</p>
       </div>
 
       <div class="card">
@@ -356,23 +326,27 @@
 
       <div class="card">
         <h3>Display Timing</h3>
-        <p>Connect decoders with 7-segment displays to show real-time counting.</p>
+        <p>Connect decoders with 7-segment displays.</p>
       </div>
 
       <div class="card">
         <h3>Simulation</h3>
-        <p>Test and observe the stopwatch functionality using NI Multisim.</p>
+        <p>Test and observe the stopwatch functionality in NI Multisim.</p>
       </div>
+
     </div>
+
   </section>
 
   <section id="components">
+
     <div class="section-title">
       <h2>Components Used</h2>
       <p>Hardware and digital logic components</p>
     </div>
 
     <div class="card-grid">
+
       <div class="card">
         <h3>7490N IC</h3>
         <ul>
@@ -395,7 +369,7 @@
         <h3>7408N AND Gate</h3>
         <ul>
           <li>Contains four AND gates</li>
-          <li>Used for control and reset logic</li>
+          <li>Used for reset/control logic</li>
         </ul>
       </div>
 
@@ -403,7 +377,7 @@
         <h3>7-Segment Display</h3>
         <ul>
           <li>Displays numeric digits</li>
-          <li>Used for real-time stopwatch output</li>
+          <li>Shows stopwatch output</li>
         </ul>
       </div>
 
@@ -422,53 +396,61 @@
           <li>Powers all digital ICs</li>
         </ul>
       </div>
+
     </div>
+
   </section>
 
   <section id="working">
+
     <div class="section-title">
       <h2>Working Principle</h2>
       <p>How the digital stopwatch functions</p>
     </div>
 
     <div class="timeline">
+
       <div class="timeline-item">
         <h3>Clock Pulse Generation</h3>
-        <p>The signal generator creates 1 pulse per second which acts as the timing signal.</p>
+        <p>The signal generator creates 1 pulse per second.</p>
       </div>
 
       <div class="timeline-item">
         <h3>Counting Process</h3>
-        <p>The first 7490 counter counts from 0–9 while the second counts from 0–5.</p>
+        <p>The first counter counts 0–9 while the second counts 0–5.</p>
       </div>
 
       <div class="timeline-item">
         <h3>BCD Conversion</h3>
-        <p>The counter outputs are sent to 7447 decoders which convert BCD into display signals.</p>
+        <p>7447 decoders convert BCD into display signals.</p>
       </div>
 
       <div class="timeline-item">
         <h3>Display Output</h3>
-        <p>The 7-segment displays show the elapsed time from 00 to 59 seconds.</p>
+        <p>7-segment displays show the elapsed time.</p>
       </div>
+
     </div>
+
   </section>
 
   <section id="procedure">
+
     <div class="section-title">
       <h2>Procedure</h2>
       <p>Steps performed in NI Multisim</p>
     </div>
 
     <div class="card-grid">
+
       <div class="card">
         <h3>Step 1</h3>
-        <p>Create the complete stopwatch circuit in NI Multisim.</p>
+        <p>Create the complete stopwatch circuit.</p>
       </div>
 
       <div class="card">
         <h3>Step 2</h3>
-        <p>Connect the XFG2 signal generator to the 7490 counters.</p>
+        <p>Connect the signal generator to counters.</p>
       </div>
 
       <div class="card">
@@ -478,102 +460,93 @@
 
       <div class="card">
         <h3>Step 4</h3>
-        <p>Connect BCD outputs to 7447 decoder ICs.</p>
+        <p>Connect outputs to decoder ICs.</p>
       </div>
 
       <div class="card">
         <h3>Step 5</h3>
-        <p>Attach common anode 7-segment displays.</p>
+        <p>Attach 7-segment displays.</p>
       </div>
 
       <div class="card">
         <h3>Step 6</h3>
-        <p>Run simulation and observe counting from 00 to 59.</p>
+        <p>Run simulation and observe stopwatch counting.</p>
       </div>
+
     </div>
+
   </section>
 
-  <section id="simulation">
+  <section id="gallery">
+
     <div class="section-title">
       <h2>Project Gallery</h2>
-      <p>Components and simulation snapshots used in the project</p>
+      <p>Components and simulation snapshots</p>
     </div>
 
     <div class="card-grid">
+
       <div class="card">
         <h3>7490N IC</h3>
-        <img src="images/7490N IC.png" alt="7490N IC" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="7490N IC.png" alt="7490N IC" class="gallery-img">
       </div>
 
       <div class="card">
         <h3>7447N IC</h3>
-        <img src="images/7447N IC.png" alt="7447N IC" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="7447N IC.png" alt="7447N IC" class="gallery-img">
       </div>
 
       <div class="card">
         <h3>7-Segment Display</h3>
-        <img src="images/7-Segment Display.png" alt="7 Segment Display" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="7-Segment Display.png" alt="7 Segment Display" class="gallery-img">
       </div>
 
       <div class="card">
         <h3>Signal Generator</h3>
-        <img src="images/Signal Generator.png" alt="Signal Generator" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="Signal Generator.png" alt="Signal Generator" class="gallery-img">
       </div>
 
       <div class="card">
         <h3>Power Supply</h3>
-        <img src="images/Power Supply.png" alt="Power Supply" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="Power Supply.png" alt="Power Supply" class="gallery-img">
       </div>
 
       <div class="card">
         <h3>7408N AND Gate</h3>
-        <img src="images/7408N AND Gate.png" alt="7408N AND Gate" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="7408N AND Gate.png" alt="7408N AND Gate" class="gallery-img">
       </div>
 
       <div class="card">
-        <h3>Initial State of Digital Stopwatch</h3>
-        <img src="images/Initial State of Digital Stopwatch.png" alt="Initial State" style="width:100%; border-radius:12px; margin-top:15px;">
+        <h3>Initial State</h3>
+        <img src="Initial State of Digital Stopwatch.png" alt="Initial State" class="gallery-img">
       </div>
 
       <div class="card">
-        <h3>Intermediate State of Digital Stopwatch</h3>
-        <img src="images/Intermediate State of Digital Stopwatch .png" alt="Intermediate State" style="width:100%; border-radius:12px; margin-top:15px;">
+        <h3>Intermediate State</h3>
+        <img src="Intermediate State of Digital Stopwatch.png" alt="Intermediate State" class="gallery-img">
       </div>
 
       <div class="card">
         <h3>Final State Before Reset</h3>
-        <img src="images/Final State Before Reset .png" alt="Final State" style="width:100%; border-radius:12px; margin-top:15px;">
+        <img src="Final State Before Reset.png" alt="Final State" class="gallery-img">
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="section-title">
-      <h2>Conclusion</h2>
-      <p>Project Summary</p>
     </div>
 
-    <div class="card">
-      <p>
-        The Digital Stopwatch project was successfully implemented using digital logic components.
-        The system accurately counted time from 00 to 59 seconds using 7490 counters and displayed
-        the results through 7-segment displays controlled by 7447 decoders.
-        This project enhanced understanding of sequential circuits, BCD conversion,
-        digital counters, and real-time display systems.
-      </p>
-    </div>
   </section>
 
   <section id="future">
+
     <div class="section-title">
       <h2>Future Enhancements</h2>
       <p>Possible improvements for the project</p>
     </div>
 
     <div class="card-grid">
+
       <div class="card">
         <h3>Pause & Resume</h3>
-        <p>Add pause and resume controls using extra logic gates.</p>
+        <p>Add pause and resume controls using logic gates.</p>
       </div>
 
       <div class="card">
@@ -583,23 +556,21 @@
 
       <div class="card">
         <h3>Microcontroller Upgrade</h3>
-        <p>Implement the stopwatch using Arduino or other microcontrollers.</p>
+        <p>Implement the stopwatch using Arduino.</p>
       </div>
 
       <div class="card">
         <h3>Physical PCB</h3>
         <p>Develop a real hardware prototype using PCB technology.</p>
       </div>
-    </div>
-  </section>
 
-  
+    </div>
+
+  </section>
 
   <footer>
     <p>© 2026 Digital Stopwatch Project | Developed for DLD Course</p>
   </footer>
-
-  
 
 </body>
 </html>
